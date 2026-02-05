@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work Progress Monitor</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2575fc">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Work Progress">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+</head>
+<body>
+    <header>
+        <h1>📋 Work Progress Monitor</h1>
+        <p>Track and monitor your work progress in real-time</p>
+    </header>
+
+    <div class="container">
+        <div class="stats-container">
+            <div class="stat-card">
+                <h3>Total Projects</h3>
+                <div class="stat-value" id="total-projects">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>Active Projects</h3>
+                <div class="stat-value" id="active-projects">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>Completed Projects</h3>
+                <div class="stat-value" id="completed-projects">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>Overall Progress</h3>
+                <div class="stat-value" id="overall-progress">0%</div>
+            </div>
+        </div>
+
+        <div class="input-section">
+            <h2>Add New Project</h2>
+            <form id="project-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="project-name">Project Name *</label>
+                        <input type="text" id="project-name" required placeholder="Enter project name">
+                    </div>
+                    <div class="form-group">
+                        <label for="project-status">Status</label>
+                        <select id="project-status">
+                            <option value="active">Active</option>
+                            <option value="paused">Paused</option>
+                            <option value="completed">Completed</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="project-description">Description</label>
+                    <textarea id="project-description" placeholder="Describe your project..."></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="project-start-date">Start Date</label>
+                        <input type="date" id="project-start-date">
+                    </div>
+                    <div class="form-group">
+                        <label for="project-end-date">End Date</label>
+                        <input type="date" id="project-end-date">
+                    </div>
+                </div>
+                <button type="submit">Add Project</button>
+            </form>
+        </div>
+
+        <div class="projects-section">
+            <h2>Projects</h2>
+            <div id="projects-list" class="projects-grid">
+                <!-- Projects will be loaded here -->
+            </div>
+        </div>
+
+        <div class="tasks-section">
+            <h2>Tasks</h2>
+            <div id="tasks-list" class="tasks-container">
+                <!-- Tasks will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <nav class="mobile-nav">
+        <button id="nav-stats" class="nav-btn active" data-tab="stats">📊</button>
+        <button id="nav-projects" class="nav-btn" data-tab="projects">📁</button>
+        <button id="nav-add" class="nav-btn" data-tab="add">➕</button>
+        <button id="nav-tasks" class="nav-btn" data-tab="tasks">✅</button>
+    </nav>
+
+    <script src="script.js"></script>
+    <script src="mobile.js"></script>
+    <script>
+        // Register service worker for PWA functionality
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(function(registration) {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(function(registrationError) {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
