@@ -18,4 +18,4 @@ A comprehensive application for monitoring and tracking work progress across var
 - Data persistence for historical tracking
 - Notification system for important updates
 - Export functionality for reports
-- Responsive design for cross-device access
+- Responsive design for cross-device access# work-progress-monitor
